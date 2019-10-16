@@ -6,22 +6,26 @@ public class AB411_05_GameOfLife {
     // Global definierte Konstanten für die beiden Dimensionen
     private final static int DIM1 = 10;
     private final static int DIM2 = 10;
-    Scanner scanner = new Scanner(System.in);
 
     // Liefert eine zufällig initialisierte Welt
-    private boolean[][] initWelt() {
+    public boolean[][] initWelt() {
         boolean[][] welt = new boolean[DIM1][DIM2];
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 30; i++) { //Wie viele lebendige Zellen am Anfang gibt
             int x = random.nextInt(DIM1);
             int y = random.nextInt(DIM2);
-            welt[y][x] = true;
+            if (!welt[y][x]) {
+                welt[y][x] = true;
+            }
+            else{
+                i--;
+            }
         }
         return welt;
     }
 
     // Gibt die aktuelle Welt aus
-    private void zeigeWelt(boolean[][] welt) {
+    public void zeigeWelt(boolean[][] welt) {
         System.out.println("------------------------------------------------------");
         for (boolean[] vector : welt
         ) {
@@ -39,7 +43,7 @@ public class AB411_05_GameOfLife {
     }
 
     // Wendet die 4 Regeln an und gibt die Folgegeneration wieder zurück
-    private boolean[][] wendeRegelnAn(boolean[][] welt) {
+    public boolean[][] wendeRegelnAn(boolean[][] welt) {
         int x = 0;
         int y = 0;
         boolean[][] neuwelt = new boolean[DIM1][DIM2];
@@ -51,11 +55,8 @@ public class AB411_05_GameOfLife {
                 if (value) {
                     if (anzahlNachbarn < 2) {
                         neuwelt[x][y] = false;
-                    } else if (anzahlNachbarn > 3) {
-                        neuwelt[x][y] = false;
-                    }
-                    else{
-                        neuwelt[x][y] = true;
+                    } else {
+                        neuwelt[x][y] = anzahlNachbarn <= 3;
                     }
                 } else {
                     if (anzahlNachbarn == 3) {
@@ -74,14 +75,12 @@ public class AB411_05_GameOfLife {
     }
 
     // Liefert Anzahl Nachbarn einer Zelle
-    private int anzahlNachbarn(boolean[][] welt, int x, int y) {
+    public int anzahlNachbarn(boolean[][] welt, int x, int y) {
         int returnValue = 0;
         for (int i = x - 1; i <= x + 1; ++i)
             for (int j = y - 1; j <= y + 1; ++j)
                 if (i < 0 || j < 0) {
-                    continue;
                 } else if (i >= DIM1 || j >= DIM2) {
-                    continue;
                 } else if (welt[i][j]) {
                     returnValue += 1;
                 }
