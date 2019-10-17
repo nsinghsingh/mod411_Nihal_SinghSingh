@@ -1,5 +1,5 @@
 
-public class InsertionSort {
+public class AB411_06_InsertionSort {
 
     public void insertionsort(int[] numbers) {
         for (int i = 1; i < numbers.length; i++) {
@@ -15,7 +15,7 @@ public class InsertionSort {
 
     public static void main(String[] args) {
         int[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
-        InsertionSort sort = new InsertionSort();
+        AB411_06_InsertionSort sort = new AB411_06_InsertionSort();
         sort.insertionsort(liste);
         for (int value : liste) System.out.print(value + " ");
     }
