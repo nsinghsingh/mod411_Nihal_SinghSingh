@@ -1,4 +1,3 @@
-
 public class AB411_06_InsertionSort {
 
     public void insertionsort(int[] numbers) {
