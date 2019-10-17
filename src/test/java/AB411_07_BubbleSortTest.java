@@ -6,16 +6,20 @@ class AB411_07_BubbleSortTest {
 
     @Test
     void bubblesort() {
-        AB411_07_BubbleSort sort = new AB411_07_BubbleSort();
-        int[] result = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
-        sort.bubblesort(liste);
+        AB411_07_BubbleSort<Integer> integerSort = new AB411_07_BubbleSort<>();
+        Integer[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
+        Integer[] result = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        integerSort.bubblesort(liste);
         assertArrayEquals(result,liste);
-        int[] liste2 = {0, 2, 8, 1, 5, 7, 9, 3, 6, 4};
-        sort.bubblesort(liste2);
-        assertArrayEquals(result,liste2);
-        int[] liste3 = {9, 3, 7, 2, 4, 6, 8, 5, 1, 0};
+        AB411_07_BubbleSort<String> stringSort = new AB411_07_BubbleSort<>();
+        String[] liste2 = {"c", "v", "b", "a", "h"};
+        String[] result2 = {"a", "b", "c", "h", "v"};
+        stringSort.bubblesort(liste2);
+        assertArrayEquals(result2,liste2);
+        AB411_07_BubbleSort<Float> sort = new AB411_07_BubbleSort<>();
+        Float[] liste3 = {0.9f, 0.3f, 0.7f, 0.2f, 0.4f, 0.6f, 1.8f, 1.5f, 2.1f, 3.0f};
+        Float[] result3 = {0.2f, 0.3f, 0.4f, 0.6f, 0.7f, 0.9f, 1.5f, 1.8f, 2.1f, 3.0f};
         sort.bubblesort(liste3);
-        assertArrayEquals(result,liste3);
+        assertArrayEquals(result3,liste3);
     }
 }
