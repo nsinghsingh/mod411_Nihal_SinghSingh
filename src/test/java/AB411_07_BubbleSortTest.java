@@ -16,10 +16,10 @@ class AB411_07_BubbleSortTest {
         String[] result2 = {"a", "b", "c", "h", "v"};
         stringSort.bubblesort(liste2);
         assertArrayEquals(result2,liste2);
-        AB411_07_BubbleSort<Float> sort = new AB411_07_BubbleSort<>();
+        AB411_07_BubbleSort<Float> floatSort = new AB411_07_BubbleSort<>();
         Float[] liste3 = {0.9f, 0.3f, 0.7f, 0.2f, 0.4f, 0.6f, 1.8f, 1.5f, 2.1f, 3.0f};
         Float[] result3 = {0.2f, 0.3f, 0.4f, 0.6f, 0.7f, 0.9f, 1.5f, 1.8f, 2.1f, 3.0f};
-        sort.bubblesort(liste3);
+        floatSort.bubblesort(liste3);
         assertArrayEquals(result3,liste3);
     }
 }
