@@ -40,7 +40,7 @@ class AB411_05_GameOfLifeTest {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         game.zeigeWelt(welt);
-        assertEquals("------------------------------------------------------\r" +
+        String result = "------------------------------------------------------\r" +
                 "|X|X|X|X|X|X|X|X|X|X|\r" +
                 "|X|X|X|X|X|X|X|X|X|X|\r" +
                 "|X|X|X|X|X|X|X|X|X|X|\r" +
@@ -51,7 +51,8 @@ class AB411_05_GameOfLifeTest {
                 "|X|X|X|X|X|X|X|X|X|X|\r" +
                 "|X|X|X|X|X|X|X|X|X|X|\r" +
                 "|X|X|X|X|X|X|X|X|X|X|\r" +
-                "------------------------------------------------------\r", outContent.toString());
+                "------------------------------------------------------\r";
+        assertEquals(result, outContent.toString());
     }
 
     @Test

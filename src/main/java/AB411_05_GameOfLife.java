@@ -11,7 +11,7 @@ public class AB411_05_GameOfLife {
     public boolean[][] initWelt() {
         boolean[][] welt = new boolean[DIM1][DIM2];
         Random random = new Random();
-        for (int i = 0; i < 100; i++) { //Wie viele lebendige Zellen am Anfang gibt
+        for (int i = 0; i < 30; i++) { //Wie viele lebendige Zellen am Anfang gibt
             int x = random.nextInt(DIM1);
             int y = random.nextInt(DIM2);
             if (!welt[y][x]) {
