@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class AB411_05_GameOfLife {
 
