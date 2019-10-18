@@ -6,16 +6,20 @@ class AB411_06_InsertionSortTest {
 
     @Test
     void insertionsort() {
-        AB411_06_InsertionSort sort = new AB411_06_InsertionSort();
-        int[] result = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
-        sort.insertionsort(liste);
+        AB411_06_InsertionSort<Integer> integerSort = new AB411_06_InsertionSort<>();
+        Integer[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
+        Integer[] result = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        integerSort.insertionsort(liste);
         assertArrayEquals(result,liste);
-        int[] liste2 = {0, 2, 8, 1, 5, 7, 9, 3, 6, 4};
-        sort.insertionsort(liste2);
-        assertArrayEquals(result,liste2);
-        int[] liste3 = {9, 3, 7, 2, 4, 6, 8, 5, 1, 0};
-        sort.insertionsort(liste3);
-        assertArrayEquals(result,liste3);
+        AB411_06_InsertionSort<String> stringSort = new AB411_06_InsertionSort<>();
+        String[] liste2 = {"c", "v", "b", "a", "h"};
+        String[] result2 = {"a", "b", "c", "h", "v"};
+        stringSort.insertionsort(liste2);
+        assertArrayEquals(result2,liste2);
+        AB411_06_InsertionSort<Float> floatSort = new AB411_06_InsertionSort<>();
+        Float[] liste3 = {0.9f, 0.3f, 0.7f, 0.2f, 0.4f, 0.6f, 1.8f, 1.5f, 2.1f, 3.0f};
+        Float[] result3 = {0.2f, 0.3f, 0.4f, 0.6f, 0.7f, 0.9f, 1.5f, 1.8f, 2.1f, 3.0f};
+        floatSort.insertionsort(liste3);
+        assertArrayEquals(result3,liste3);
     }
 }
