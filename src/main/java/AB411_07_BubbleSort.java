@@ -1,7 +1,7 @@
 public class AB411_07_BubbleSort<T extends Comparable<T>>{
 
 
-    public void bubblesort(T[] array){
+    void bubblesort(T[] array){
         for (int n = array.length; n > 1; --n) {
             for ( int i = 0; i < n - 1; ++i) {
                 if (array[i].compareTo(array[i+1]) > 0) {
