@@ -1,5 +1,4 @@
-public class AB411_07_BubbleSort<T extends Comparable<T>> {
-
+public class AB411_07_BubbleSort<T extends Comparable<T>> implements Sort<T> {
 
     public void sort(T[] array) {
         for (int n = array.length; n > 1; --n) {
@@ -11,13 +10,5 @@ public class AB411_07_BubbleSort<T extends Comparable<T>> {
                 }
             }
         }
-    }
-
-
-    public static void main(String[] args) {
-        AB411_07_BubbleSort<Integer> integerSort = new AB411_07_BubbleSort<>();
-        Integer[] liste = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
-        integerSort.sort(liste);
-        for (int value : liste) System.out.print(value + " ");
     }
 }

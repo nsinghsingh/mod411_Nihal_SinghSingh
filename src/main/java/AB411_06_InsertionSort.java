@@ -1,4 +1,4 @@
-public class AB411_06_InsertionSort<T extends Comparable<T>> {
+public class AB411_06_InsertionSort<T extends Comparable<T>> implements Sort<T> {
 
     public void sort(T[] numbers) {
         for (int i = 1; i < numbers.length; i++) {
@@ -10,12 +10,5 @@ public class AB411_06_InsertionSort<T extends Comparable<T>> {
                 numbers[j] = value;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Integer[] liste = {0, 4, 9, 6, 2, 8, 5, 1, 7, 3};
-        AB411_06_InsertionSort<Integer> integerSort = new AB411_06_InsertionSort<>();
-        integerSort.sort(liste);
-        for (int value : liste) System.out.print(value + " ");
     }
 }
