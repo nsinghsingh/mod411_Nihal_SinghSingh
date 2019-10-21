@@ -1,6 +1,6 @@
 public class AB411_06_InsertionSort<T extends Comparable<T>> {
 
-    void sort(T[] numbers) {
+    public void sort(T[] numbers) {
         for (int i = 1; i < numbers.length; i++) {
             T value = numbers[i];
             int j = i;

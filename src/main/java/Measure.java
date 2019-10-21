@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -11,10 +12,9 @@ public class Measure {
     }
 
     public static void main(String[] args) {
-        String[] liste = new String[100000];
-        Arrays.fill(liste, "test");
-        AB411_06_InsertionSort<String> stringSort = new AB411_06_InsertionSort<>();
-        long duration = measure(liste, stringSort::sort);
+        Integer[] liste = Structures.makeArray(100000);
+        AB411_06_InsertionSort<Integer> integerSort = new AB411_06_InsertionSort<>();
+        long duration = Measure.measure(liste, integerSort::sort);
         System.out.println(duration + " ms");
     }
 
