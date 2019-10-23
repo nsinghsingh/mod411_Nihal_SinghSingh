@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class AB411_05_GameOfLife {
 
@@ -16,8 +15,7 @@ public class AB411_05_GameOfLife {
             int y = random.nextInt(DIM2);
             if (!welt[y][x]) {
                 welt[y][x] = true;
-            }
-            else{
+            } else {
                 i--;
             }
         }
@@ -61,8 +59,7 @@ public class AB411_05_GameOfLife {
                 } else {
                     if (anzahlNachbarn == 3) {
                         neuwelt[x][y] = true;
-                    }
-                    else{
+                    } else {
                         neuwelt[x][y] = false;
                     }
                 }
