@@ -52,11 +52,16 @@ public class ArrayQueue implements Queue {
     }
 
     @Override
-    public void remove() {
+    public Object remove() {
         if (!isEmpty()) {
+            Object temporary = array[front];
             array[front] = null;
             front += 1;
             front = front % array.length;
+            return temporary;
+        }
+        else{
+            return null;
         }
     }
 }

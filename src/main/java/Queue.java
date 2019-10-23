@@ -33,5 +33,5 @@ public interface Queue<T> {
      *
      * @return null, wenn die Queue leer ist
      */
-    void remove();
+    T remove();
 }
