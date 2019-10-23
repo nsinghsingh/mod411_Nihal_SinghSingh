@@ -16,7 +16,12 @@ class ArrayQueueTest {
     void isEmpty() {
         assertTrue(queue.isEmpty());
         queue.put(10);
-        assertTrue(!queue.isEmpty());
+        queue.put(10);
+        queue.put(10);
+        queue.put(10);
+        queue.put(10);
+        queue.put(10);
+        assertFalse(queue.isEmpty());
     }
 
     @Test
@@ -44,7 +49,7 @@ class ArrayQueueTest {
     @Test
     void put() {
         queue.put(10);
-        assertTrue(!queue.isEmpty());
+        assertFalse(queue.isEmpty());
         int result = (int) queue.getFrontElement();
         assertEquals(10, result);
         queue.put(10);
@@ -66,6 +71,10 @@ class ArrayQueueTest {
         queue.remove();
         double result = (double) queue.getFrontElement();
         assertEquals(3.6, result);
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        assertTrue(queue.isEmpty());
     }
 
     @Test

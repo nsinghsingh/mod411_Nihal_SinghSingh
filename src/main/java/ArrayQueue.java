@@ -18,7 +18,7 @@ public class ArrayQueue implements Queue {
 
     @Override
     public boolean isEmpty() {
-        return (rear == front);
+        return (rear == front && array[front] == null);
     }
 
     @Override
