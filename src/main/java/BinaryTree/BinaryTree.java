@@ -7,5 +7,5 @@ public interface BinaryTree {
 
     Object getRoot();
 
-    void makeTree(Object root, Object left, Object right);
+    void makeTree(Object root, BinaryTreeNode left, BinaryTreeNode right);
 }

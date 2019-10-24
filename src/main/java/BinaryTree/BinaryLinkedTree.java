@@ -15,10 +15,8 @@ public class BinaryLinkedTree implements BinaryTree {
     }
 
     @Override
-    public void makeTree(Object root, Object left, Object right) {
-        this.root = new BinaryTreeNode(root,
-                ((BinaryLinkedTree) left).root,
-                ((BinaryLinkedTree) right).root);
+    public void makeTree(Object root, BinaryTreeNode left, BinaryTreeNode right) {
+        this.root = new BinaryTreeNode(root, left, right);
     }
 
 }
