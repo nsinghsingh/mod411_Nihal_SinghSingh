@@ -1,3 +1,5 @@
+package Sorts;
+
 public class AB411_06_InsertionSort<T extends Comparable<T>> implements Sort<T> {
 
     public void sort(T[] numbers) {

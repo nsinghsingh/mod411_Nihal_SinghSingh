@@ -1,3 +1,5 @@
+package Sorts;
+
 import java.util.function.Consumer;
 
 public class Measure {

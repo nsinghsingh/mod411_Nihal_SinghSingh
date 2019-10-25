@@ -1,11 +1,19 @@
 
 package BinaryTree;
 
-public interface BinaryTree {
+public interface BinaryTree<T extends Comparable<T>> {
 
     boolean isEmpty();
 
     Object getRoot();
 
-    void makeTree(Object root, BinaryTreeNode left, BinaryTreeNode right);
+    BinaryTreeNode getLeft();
+
+    BinaryTreeNode getRight();
+
+    void makeTree(T root, BinaryTreeNode left, BinaryTreeNode right);
+
+    void setTree(T[] values);
+
+    BinaryTreeNode setBranch(BinaryTreeNode<T> branch, BinaryTreeNode newNode, T value);
 }

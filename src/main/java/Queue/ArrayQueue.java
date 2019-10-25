@@ -1,3 +1,5 @@
+package Queue;
+
 public class ArrayQueue implements Queue {
 
     private Object[] array;

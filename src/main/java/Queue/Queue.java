@@ -1,3 +1,5 @@
+package Queue;
+
 public interface Queue<T> {
 
     /**
@@ -10,14 +12,14 @@ public interface Queue<T> {
     /**
      * Liefert das vorderes Element der Datenstruktur
      *
-     * @return null, wenn die Queue leer ist
+     * @return null, wenn die Queue.Queue leer ist
      */
     T getFrontElement();
 
     /**
      * Liefert das hinterste Element der Datenstruktur.
      *
-     * @return null, wenn die Queue leer ist
+     * @return null, wenn die Queue.Queue leer ist
      */
     T getRearElement();
 
@@ -29,9 +31,9 @@ public interface Queue<T> {
     void put(T payload);
 
     /**
-     * Entfernt das vorderste Elemement aus der Queue.
+     * Entfernt das vorderste Elemement aus der Queue.Queue.
      *
-     * @return null, wenn die Queue leer ist
+     * @return null, wenn die Queue.Queue leer ist
      */
     T remove();
 }
