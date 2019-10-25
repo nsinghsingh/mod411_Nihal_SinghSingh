@@ -1,64 +1,250 @@
 package BinaryTree;
 
-public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> {
+import Queue.ArrayQueue;
 
-    private BinaryTreeNode<T> root;
+import java.lang.reflect.Method;
 
-    @Override
+public class BinaryLinkedTree implements BinaryTree {
+
+    // root node
+    private BinaryTreeNode root;
+
+    // class data members
+    private static Method visit;                               // visit method to use during a traversal
+    private static Object[] visitArgs = new Object[1];         // parameters of visit method
+    private static int count;                                  // counter
+    private static Class[] paramType = {BinaryTreeNode.class}; // type of parameter for visit
+    private static Method theAdd1;                             // method to increment count by 1
+    static Method outputMethod;                        // method to output node element
+
+    // method to initialize class data members
+    static {
+        try {
+            Class<BinaryLinkedTree> treeClass = BinaryLinkedTree.class;
+            theAdd1 = treeClass.getMethod("add1", paramType);
+            outputMethod = treeClass.getMethod("output", paramType);
+        } catch (Exception e) {
+            // can't catch exceptionn here
+        }
+    }
+
+    /**
+     * visit method that outputs element
+     */
+    public static void output(BinaryTreeNode treeNode) {
+        System.out.print(treeNode.getPayload() + " ");
+    }
+
+    /**
+     * Besuchsmethode zum Zählen von Knoten.
+     */
+    @SuppressWarnings("unused")
+    public static void add1(BinaryTreeNode treeNode) {
+        count++;
+    }
+
+    /**
+     * @return Liefert den Wert true, falls der Baum leer ist
+     */
     public boolean isEmpty() {
         return root == null;
     }
 
-    @Override
-    public T getRoot() {
+    /**
+     * Liefert die Wurzel des Baumes.
+     *
+     * @return Liefert den Wert null, falls der Baum leer ist
+     */
+    public Object getRoot() {
         return (isEmpty()) ? null : root.getPayload();
     }
 
-    @Override
-    public BinaryTreeNode getLeft() {
-        return (isEmpty()) ? null : root.getLeft();
+    /**
+     * Erstellt eine Baumstruktur mit den angegebenen Parameter.
+     *
+     * <b>Vorsicht:</b> Der rechte und linke Teilbaum wird nicht geklont!
+     *
+     * @param root  Wurzel der Baumstruktur
+     * @param left  Linker Teilbaum
+     * @param right Rechter Teilbaum
+     */
+    public void makeTree(Object root, Object left, Object right) {
+        this.root = new BinaryTreeNode(root,
+                ((BinaryLinkedTree) left).root,
+                ((BinaryLinkedTree) right).root);
     }
 
-    @Override
-    public BinaryTreeNode getRight() {
-        return (isEmpty()) ? null : root.getRight();
+    /**
+     * Löscht den linken Teilbaum.
+     *
+     * @return Gelöschter Teilbaum
+     * @throws IllegalArgumentException wenn der Teilbaum leer ist
+     */
+    public BinaryTree removeLeftSubtree() {
+        if (isEmpty())
+            throw new IllegalArgumentException("tree is empty");
+
+        // Linken Teilbaum trennen
+        BinaryLinkedTree leftSubtree = new BinaryLinkedTree();
+        leftSubtree.root = root.getLeftChild();
+        root.setLeftChild(null);
+
+        return leftSubtree;
     }
 
-    @Override
-    public void makeTree(T root, BinaryTreeNode left, BinaryTreeNode right) {
-        if (root == null && left == null && right == null){
-            this.root = null;
-        }
-        else{
-            this.root = new BinaryTreeNode<T>(root, left, right);
-        }
+    /**
+     * Löscht den rechten Teilbaum.
+     *
+     * @return Gelöschter Teilbaum
+     * @throws IllegalArgumentException wenn der Teilbaum leer ist
+     */
+    public BinaryTree removeRightSubtree() {
+        if (isEmpty())
+            throw new IllegalArgumentException("tree is empty");
+
+        // Rechten Teilbaum trennen
+        BinaryLinkedTree rightSubtree = new BinaryLinkedTree();
+        rightSubtree.root = root.getRightChild();
+        root.setRightChild(null);
+
+        return rightSubtree;
     }
 
-    @Override
-    public void setTree(T[] values){
-        makeTree(values[0], null, null);
-        for (int i = 1; i < values.length; i++) {
-            BinaryTreeNode<T> newNode = new BinaryTreeNode<>(values[i]);
-            root = setBranch(root, newNode, values[i]);
-        }
+    /**
+     * Preorder traversal
+     *
+     * @param visit Method to be used during visit
+     */
+    public void preOrder(Method visit) {
+        BinaryLinkedTree.visit = visit;
+        traversePreOrder(root);
     }
 
-    @Override
-    public BinaryTreeNode<T> setBranch(BinaryTreeNode<T> branch, BinaryTreeNode newNode, T value){
-        if (branch.getPayload().compareTo(value) < 0) {
-            if (branch.getRight() == null) {
-                branch = new BinaryTreeNode<T>(branch.getPayload(), branch.getLeft(), newNode);
-            } else {
-                branch = new BinaryTreeNode<T>(branch.getPayload(), branch.getLeft(), setBranch(branch.getRight(), newNode, value));
+    /**
+     * Actual preorder traversal method
+     */
+    private void traversePreOrder(BinaryTreeNode treeNode) {
+        if (treeNode != null) {
+            visitArgs[0] = treeNode;
+            try {
+                visit.invoke(null, visitArgs);
+            } catch (Exception e) {
+                System.out.println(e);
             }
-        } else {
-            if (branch.getLeft() == null) {
-                branch = new BinaryTreeNode<T>(branch.getPayload(), newNode, branch.getRight());
-            } else {
-                branch = new BinaryTreeNode<T>(branch.getPayload(), setBranch(branch.getLeft(), newNode, value), branch.getRight());
+            traversePreOrder(treeNode.getLeftChild());
+            traversePreOrder(treeNode.getRightChild());
+        }
+    }
+
+    /**
+     * Inorder traversal
+     */
+    public void inOrder(Method visit) {
+        BinaryLinkedTree.visit = visit;
+        traverseInOrder(root);
+    }
+
+    /**
+     * actual inorder traversal method
+     */
+    private void traverseInOrder(BinaryTreeNode treeNode) {
+        if (treeNode != null) {
+            traverseInOrder(treeNode.getLeftChild());
+            visitArgs[0] = treeNode;
+            try {
+                visit.invoke(null, visitArgs);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            traverseInOrder(treeNode.getRightChild());
+        }
+    }
+
+    /**
+     * Postorder traversal
+     */
+    public void postOrder(Method visit) {
+        BinaryLinkedTree.visit = visit;
+        traversePostOrder(root);
+    }
+
+    /**
+     * Actual postorder traversal method
+     */
+    @SuppressWarnings("ThrowablePrintedToSystemOut")
+    private void traversePostOrder(BinaryTreeNode treeNode) {
+        if (treeNode != null) {
+            traversePostOrder(treeNode.getLeftChild());
+            traversePostOrder(treeNode.getRightChild());
+            visitArgs[0] = treeNode;
+            try {
+                visit.invoke(null, visitArgs);
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
-        return branch;
+    }
+
+    /**
+     * Level order traversal
+     */
+    public void levelOrder(Method visit) {
+        ArrayQueue<BinaryTreeNode> queue = new ArrayQueue<BinaryTreeNode>();
+        BinaryTreeNode treeNode = root;
+        while (treeNode != null) {
+            visitArgs[0] = treeNode;
+            try {
+                visit.invoke(null, visitArgs);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            // put t's children on queue
+            if (treeNode.getLeftChild() != null)
+                queue.put(treeNode.getLeftChild());
+            if (treeNode.getRightChild() != null)
+                queue.put(treeNode.getRightChild());
+
+            // get next node to visit
+            treeNode = queue.remove();
+        }
+    }
+
+    /**
+     * Liefert die Anzahl der Knoten im Baum.
+     *
+     * @return Anzahl Knoten im Baum
+     */
+    public int size() {
+        count = 0;
+        preOrder(theAdd1);
+        return count;
+    }
+
+    /**
+     * Liefert die Tiefe des Baumes beginnend mit dem Startknoten.
+     *
+     * @return Tiefe des Baumes
+     */
+    public int height() {
+        return countHeight(root);
+    }
+
+
+    /**
+     * Liefert die Tiefe des Baumes beginnend mit dem angegebenen Knoten.
+     *
+     * @param treeNode Von diesem Knoten soll die Tiefe berechnet werden
+     * @return Tiefe des Baumes
+     */
+    private int countHeight(BinaryTreeNode treeNode) {
+        if (treeNode == null)
+            return 0;
+
+        int leftHeight = countHeight(treeNode.getLeftChild());
+        int rightHeight = countHeight(treeNode.getRightChild());
+
+        return (leftHeight > rightHeight) ? ++leftHeight : ++rightHeight;
     }
 
 }

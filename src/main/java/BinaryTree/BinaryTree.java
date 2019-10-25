@@ -1,19 +1,52 @@
-
 package BinaryTree;
 
-public interface BinaryTree<T extends Comparable<T>> {
+import java.lang.reflect.Method;
 
+public interface BinaryTree {
+
+    /**
+     * @return liefert den Wert true, falls der Baum leer ist
+     */
     boolean isEmpty();
 
+    /**
+     * Liefert die Wurzel des Baumes.
+     *
+     * @return Liefert den Wert null, falls der Baum leer ist
+     */
     Object getRoot();
 
-    BinaryTreeNode getLeft();
+    /**
+     * Erstellt eine Baumstruktur mit den angegebenen Parameter.
+     *
+     * <b>Vorsicht:</b> Der rechte und linke Teilbaum wird nicht geklont!
+     *
+     * @param root  Wurzel der Baumstruktur
+     * @param left  Linker Teilbaum
+     * @param right Rechter Teilbaum
+     */
+    void makeTree(Object root, Object left, Object right);
 
-    BinaryTreeNode getRight();
+    /**
+     * Löscht den linken Teilbaum.
+     *
+     * @return Gelöschter Teilbaum
+     */
+    BinaryTree removeLeftSubtree();
 
-    void makeTree(T root, BinaryTreeNode left, BinaryTreeNode right);
+    /**
+     * Löscht den rechten Teilbaum.
+     *
+     * @return Gelöschter Teilbaum
+     */
+    BinaryTree removeRightSubtree();
 
-    void setTree(T[] values);
+    void preOrder(Method visit);
 
-    BinaryTreeNode setBranch(BinaryTreeNode<T> branch, BinaryTreeNode newNode, T value);
+    void inOrder(Method visit);
+
+    void postOrder(Method visit);
+
+    void levelOrder(Method visit);
+
 }

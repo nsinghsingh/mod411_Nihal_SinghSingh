@@ -1,6 +1,5 @@
 package Queue;
 
-import Queue.ArrayQueue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,81 +7,42 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayQueueTest {
 
-    ArrayQueue queue;
+    private ArrayQueue<Integer> arrayQueue;
 
     @BeforeEach
     void setUp() {
-        queue = new ArrayQueue(6);
+        arrayQueue = new ArrayQueue<Integer>(3);
     }
 
     @Test
     void isEmpty() {
-        assertTrue(queue.isEmpty());
-        queue.put(10);
-        queue.put(10);
-        queue.put(10);
-        queue.put(10);
-        queue.put(10);
-        queue.put(10);
-        assertFalse(queue.isEmpty());
-        
+        assertTrue(arrayQueue.isEmpty());
     }
 
     @Test
     void getFrontElement() {
-        queue.put(10);
-        queue.put(true);
-        queue.put(3.6);
-        queue.put(99);
-        queue.put("test");
-        int result = (int) queue.getFrontElement();
-        assertEquals(10, result);
+        arrayQueue.put(1);
+        arrayQueue.put(2);
+        arrayQueue.put(3);
+        assertEquals(1, arrayQueue.getFrontElement());
     }
 
     @Test
     void getRearElement() {
-        queue.put(10);
-        queue.put(true);
-        queue.put(3.6);
-        queue.put(99);
-        queue.put("test");
-        String result = (String) queue.getRearElement();
-        assertEquals("test", result);
+        arrayQueue.put(1);
+        arrayQueue.put(2);
+        arrayQueue.put(3);
+        assertEquals(3, arrayQueue.getRearElement());
     }
 
     @Test
-    void put() {
-        queue.put(10);
-        assertFalse(queue.isEmpty());
-        int result = (int) queue.getFrontElement();
-        assertEquals(10, result);
-        queue.put(10);
-        queue.put(10);
-        queue.put(10);
-        queue.put(10);
-        queue.put(10);
-        assertThrows(IndexOutOfBoundsException.class, () -> queue.put(10));
+    void throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new ArrayQueue<>(-5);
+        });
     }
 
     @Test
     void remove() {
-        queue.put(10);
-        queue.put(true);
-        queue.put(3.6);
-        queue.put(99);
-        queue.put("test");
-        queue.remove();
-        queue.remove();
-        double result = (double) queue.getFrontElement();
-        assertEquals(3.6, result);
-        queue.remove();
-        queue.remove();
-        queue.remove();
-        assertTrue(queue.isEmpty());
-    }
-
-    @Test
-    void throwException(){
-        assertThrows(IllegalArgumentException.class, () -> {ArrayQueue queue = new ArrayQueue(0);});
     }
 }
