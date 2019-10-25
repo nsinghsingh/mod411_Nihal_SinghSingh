@@ -39,7 +39,9 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
         makeTree(values[0], null, null);
         for (int i = 1; i < values.length; i++) {
             BinaryTreeNode<T> newNode = new BinaryTreeNode<>(values[i]);
-            root = setBranch(root, newNode, values[i]);
+            if (setBranch(root, newNode, values[i]) != null){
+                root = setBranch(root, newNode, values[i]);
+            }
         }
     }
 
@@ -51,14 +53,34 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
             } else {
                 branch = new BinaryTreeNode<T>(branch.getPayload(), branch.getLeft(), setBranch(branch.getRight(), newNode, value));
             }
-        } else {
+        } else if (branch.getPayload().compareTo(value) > 0) {
             if (branch.getLeft() == null) {
                 branch = new BinaryTreeNode<T>(branch.getPayload(), newNode, branch.getRight());
             } else {
                 branch = new BinaryTreeNode<T>(branch.getPayload(), setBranch(branch.getLeft(), newNode, value), branch.getRight());
             }
         }
+        else {
+            return null;
+        }
         return branch;
+    }
+
+    @Override
+    public boolean insert(T value) {
+        BinaryTreeNode<T> newNode = new BinaryTreeNode<>(value);
+        if (setBranch(root, newNode, value) == null){
+            return false;
+        }
+        else{
+            root = setBranch(root, newNode, value);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean delete(T value) {
+        return false;
     }
 
 }

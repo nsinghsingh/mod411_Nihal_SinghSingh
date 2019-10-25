@@ -8,7 +8,7 @@ import lombok.Setter;
 
 public class BinaryTreeNode<T extends Comparable<T>>{
     private T payload;
-    private BinaryTreeNode left, right;
+    private BinaryTreeNode<T> left, right;
 
     public BinaryTreeNode() {
         this(null);

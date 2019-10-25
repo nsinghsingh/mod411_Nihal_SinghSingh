@@ -16,4 +16,8 @@ public interface BinaryTree<T extends Comparable<T>> {
     void setTree(T[] values);
 
     BinaryTreeNode setBranch(BinaryTreeNode<T> branch, BinaryTreeNode newNode, T value);
+
+    boolean insert(T value);
+
+    boolean delete(T value);
 }
